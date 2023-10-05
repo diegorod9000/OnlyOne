@@ -12,7 +12,7 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position+= Vector3.left*0.01f;
+        transform.position+= Vector3.left*0.02f;
         
     }
 }
