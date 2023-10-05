@@ -29,6 +29,6 @@ public class MapObjects : MonoBehaviour
             borders[numBorders - 1] = Instantiate(log, new Vector3(0, 23.0f, 0), new Quaternion(180,0,0,0));
             borders[numBorders - 2] = Instantiate(log, new Vector3(0, -23.0f, 0), Quaternion.identity);
         }
-        framePos += 0.01f;
+        framePos += 0.02f;
     }
 }
