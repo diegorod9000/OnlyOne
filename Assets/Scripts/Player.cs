@@ -10,10 +10,14 @@ public class Player : MonoBehaviour
     public ThrownDebris debrisScript;
     public GameObject player2;
     static bool frozen;
+    bool stun;
+    int stunClock;
+    const int stunAmt = 1000;
+    int lastThrown = -1;
     void Start()
     {
-        
-        
+        stun = false;
+        stunClock = stunAmt;
     }
 
     // Update is called once per frame
@@ -21,26 +25,58 @@ public class Player : MonoBehaviour
     {
         Vector3 positionMove = Vector3.zero;
         transform.position+= Vector3.left*0.02f;
-        if (Input.GetKey(upKey)){
-            positionMove+= Vector3.up*0.035f;
+        if(stun){
+            stunClock--;
+            if(stunClock == 0){
+                stun = false;
+                stunClock = stunAmt;
+            }
         }
-        if (Input.GetKey(downKey)){
-            positionMove+= Vector3.down*0.035f;
+        else {
+            if (Input.GetKey(upKey)){
+                positionMove+= Vector3.up*0.035f;
+            }
+            if (Input.GetKey(downKey)){
+                positionMove+= Vector3.down*0.035f;
+            }
+            if (Input.GetKey(leftKey)){
+                positionMove+= Vector3.left*0.035f;
+            }
+            if (Input.GetKey(rightKey)){
+                positionMove+= Vector3.right*0.035f;
+            }
+            if (Input.GetKey(throwKey)){
+                for(int i = 0; i < debrisScript.getNumDebris(); i++){
+                    GameObject debris = debrisScript.getDebris(i);
+                    if(debris && vecClose(debris.transform.position - transform.position)){
+                        debrisScript.setTarget(i,player2.transform.position - transform.position);
+                        debrisScript.throwDebris(i);
+                        lastThrown = i;
+                        break;
+                    }
+                }
+            }
+            for(int i = 0; i < debrisScript.getNumDebris(); i++){
+                GameObject debris = debrisScript.getDebris(i);
+                if(i != lastThrown && debris && vecClose(debris.transform.position - transform.position) && debrisScript.debrisThrown(i)){
+                    stun = true;
+                    debrisScript.destroyDebris(i);
+                    break;
+                }
+            }
+            if(positionMove.magnitude > 0)
+            {
+                positionMove = positionMove.normalized*0.035f;
+            }
+            transform.position+=positionMove;
         }
-        if (Input.GetKey(leftKey)){
-            positionMove+= Vector3.left*0.035f;
+    }
+
+    bool vecClose(Vector3 vec){
+        if(vec.x * vec.x + vec.y * vec.y < 5){
+            return true;
         }
-        if (Input.GetKey(rightKey)){
-            positionMove+= Vector3.right*0.035f;
-        }
-        if (Input.GetKey(throwKey)){
-            debrisScript.setTarget(0,new Vector3(0.5f, 0.5f, 0));
-        }
-        if(positionMove.magnitude > 0)
-        {
-            positionMove = positionMove.normalized*0.035f;
-        }
-        transform.position+=positionMove;
+        return false;
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -49,4 +85,6 @@ public class Player : MonoBehaviour
             frozen = true;
         }
     }
+
+
 }
