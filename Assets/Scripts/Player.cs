@@ -6,8 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour 
 {
     // Start is called before the first frame update
-    public KeyCode upKey, downKey, leftKey, rightKey;
-    
+    public KeyCode upKey, downKey, leftKey, rightKey, throwKey;
+    public ThrownDebris debrisScript;
+    public GameObject player2;
     static bool frozen;
     void Start()
     {
@@ -31,6 +32,9 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(rightKey)){
             positionMove+= Vector3.right*0.035f;
+        }
+        if (Input.GetKey(throwKey)){
+            debrisScript.setTarget(0,new Vector3(0.5f, 0.5f, 0));
         }
         if(positionMove.magnitude > 0)
         {
