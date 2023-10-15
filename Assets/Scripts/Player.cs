@@ -14,8 +14,12 @@ public class Player : MonoBehaviour
     int stunClock;
     const int stunAmt = 1000;
     int lastThrown = -1;
+
+    public AudioClip walkingSound;
+    public AudioSource walkingSource;
     void Start()
     {
+        walkingSource = GetComponent<AudioSource>();
         stun = false;
         stunClock = stunAmt;
     }
@@ -67,6 +71,14 @@ public class Player : MonoBehaviour
             if(positionMove.magnitude > 0)
             {
                 positionMove = positionMove.normalized*0.035f;
+                if(!walkingSource.isPlaying)
+                {
+                    walkingSource.Play();
+                }
+            }
+            else 
+            {
+                walkingSource.Stop();
             }
             transform.position+=positionMove;
         }
