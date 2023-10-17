@@ -5,6 +5,8 @@ using UnityEngine;
 public class MapObjects : MonoBehaviour
 {
     public GameObject log; 
+    public GameObject tree; 
+    public ThrownDebris debrisScript;
     int framePos = 0;
     const int numBorders = 30;
     const int numObstacles = 50;
@@ -49,9 +51,21 @@ public class MapObjects : MonoBehaviour
                 obstacles[i] = obstacles[i + numDeleted];
             }
         }
-        if(framePos % 100 == 0  && Random.Range(0.0f, 1.0f) < 0.5f && currentObstacle != numObstacles){
-            obstacles[currentObstacle] = Instantiate(log, new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0), new Quaternion(Random.Range(0,180),Random.Range(0,180),0,0));
-            currentObstacle++;
+        float rand = Random.Range(0.0f, 2.0f);
+        if(framePos % 100 == 0  && rand < 1.0f && currentObstacle != numObstacles){
+            if(rand < 0.33f){
+                obstacles[currentObstacle] = Instantiate(log, new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0), new Quaternion(Random.Range(0,180),Random.Range(0,180),0,0));
+                currentObstacle++;
+            } else if(rand < 0.66f) {
+                obstacles[currentObstacle] = Instantiate(tree, new Vector3(50.0f, Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
+                currentObstacle++;
+            } else {
+                GameObject debris = debrisScript.addDebris(new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0));
+                if(debris){
+                    obstacles[currentObstacle] = debris;
+                    currentObstacle++;
+                }
+            }
         }
         framePos ++;
     }

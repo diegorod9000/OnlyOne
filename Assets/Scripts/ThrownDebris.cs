@@ -8,18 +8,18 @@ public class ThrownDebris : MonoBehaviour
     public GameObject log;
     public GameObject player1;
     public GameObject player2;
-    const int numDebris = 1;
+    const int numDebris = 4;
     GameObject[] debris = new GameObject[numDebris];
     Vector3[] targets = new Vector3[numDebris];
     bool[] thrown = new bool[numDebris];
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < numDebris; i++){
-            targets[i] = new Vector3(0f, 0f, 0f);
-            debris[i] = Instantiate(log, new Vector3(0, 0, 0), Quaternion.identity);
-            thrown[i] = false;
-        }
+        // for(int i = 0; i < numDebris; i++){
+        //     targets[i] = new Vector3(0f, 0f, 0f);
+        //     debris[i] = Instantiate(log, new Vector3(0, 0, 0), Quaternion.identity);
+        //     thrown[i] = false;
+        // }
     }
 
     // Update is called once per frame
@@ -58,4 +58,19 @@ public class ThrownDebris : MonoBehaviour
         targets[i] = new Vector3(0f, 0f, 0f);
         thrown[i] = false;
     }
+
+    public GameObject addDebris(Vector3 pos){
+        GameObject newDebris = null;
+        for(int i = 0; i < numDebris; i++){
+            if(!debris[i]){
+                targets[i] = new Vector3(0f, 0f, 0f);
+                newDebris = Instantiate(log, pos, Quaternion.identity);
+                thrown[i] = false;
+                debris[i] = newDebris;
+                break;
+            }
+        }
+        return newDebris;
+    }
+
 }
