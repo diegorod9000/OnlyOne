@@ -60,11 +60,7 @@ public class MapObjects : MonoBehaviour
                 obstacles[currentObstacle] = Instantiate(tree, new Vector3(50.0f, Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
                 currentObstacle++;
             } else {
-                GameObject debris = debrisScript.addDebris(new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0));
-                if(debris){
-                    obstacles[currentObstacle] = debris;
-                    currentObstacle++;
-                }
+                debrisScript.addDebris(new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0));
             }
         }
         framePos ++;
