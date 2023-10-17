@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static bool frozen;
+    public static bool frozen;
     // Start is called before the first frame update
     void Start()
     {
