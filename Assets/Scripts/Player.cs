@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     const int stunAmt = 1000;
     int lastThrown = -1;
 
+    private float playerSpeed;
+    private float adrenaline;
+
     public SpriteRenderer currentSprite;
     public Sprite upSprite,downSprite,leftSprite,rightSprite;
 
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour
     public AudioSource walkingSource;
     void Start()
     {
+        adrenaline = 0.0f;
+        playerSpeed = 0.03f;
         currentSprite = GetComponent<SpriteRenderer>();
         walkingSource = GetComponent<AudioSource>();
         stun = false;
@@ -43,21 +48,21 @@ public class Player : MonoBehaviour
         else {
             if (Input.GetKey(upKey)){
                 currentSprite.sprite = upSprite;
-                positionMove+= Vector3.up*0.035f;
+                positionMove+= Vector3.up;
             }
             if (Input.GetKey(downKey)){
                 currentSprite.sprite = downSprite;
-                positionMove+= Vector3.down*0.035f;
+                positionMove+= Vector3.down;
             }
             if (Input.GetKey(leftKey)){
                 currentSprite.sprite = leftSprite;
-                positionMove+= Vector3.left*0.035f;
+                positionMove+= Vector3.left;
             }
             if (Input.GetKey(rightKey)){
                 if(currentSprite.sprite!=rightSprite){
                     currentSprite.sprite = rightSprite;
                 }
-                positionMove+= Vector3.right*0.035f;
+                positionMove+= Vector3.right;
             }
             if (Input.GetKey(throwKey)){
                 for(int i = 0; i < debrisScript.getNumDebris(); i++){
@@ -80,7 +85,7 @@ public class Player : MonoBehaviour
             }
             if(positionMove.magnitude > 0)
             {
-                positionMove = positionMove.normalized*0.035f;
+                positionMove = positionMove.normalized*playerSpeed;
                 
                 if(!walkingSource.isPlaying)
                 {
@@ -92,6 +97,9 @@ public class Player : MonoBehaviour
                 walkingSource.Stop();
             }
             transform.position+=positionMove;
+        }
+        if(transform.position.x<-10){
+            adrenaline+=0.1f;
         }
     }
 
