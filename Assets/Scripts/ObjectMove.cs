@@ -12,6 +12,10 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.frozen){
+            return;
+        }
+        
         transform.position+= Vector3.left*0.02f;
         
     }

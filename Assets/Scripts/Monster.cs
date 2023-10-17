@@ -15,14 +15,5 @@ public class Monster : MonoBehaviour
     {
         
     }
-    void OnCollisionEnter(Collision other) {
-        Debug.Log("collided");
-        if(other.gameObject.CompareTag("Player1")){
-            Application.Quit();
-        }
-        else if(other.gameObject.CompareTag("Player2")){
-            Application.Quit();
-        }
-        Application.Quit();
-    }
+    
 }

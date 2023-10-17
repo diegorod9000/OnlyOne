@@ -25,6 +25,9 @@ public class ThrownDebris : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.frozen){
+            return;
+        }
         for(int i = 0; i < numDebris; i++){
             if(debris[i]){
                 debris[i].transform.position += targets[i].normalized*0.05f;

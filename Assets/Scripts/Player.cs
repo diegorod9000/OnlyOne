@@ -35,6 +35,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(GameManager.frozen){
+            return;
+        }
+        
         Vector3 positionMove = Vector3.zero;
         transform.position+= Vector3.left*0.02f;
         if(stun){
@@ -112,6 +117,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.name=="Monster"){
             Debug.Log("You died");
+            GameManager.frozen = true;
         }
     }
 

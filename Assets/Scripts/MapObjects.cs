@@ -27,6 +27,10 @@ public class MapObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.frozen){
+            return;
+        }
+        
         if(framePos == 300){
             framePos = 0;
             Destroy(borders[0]);

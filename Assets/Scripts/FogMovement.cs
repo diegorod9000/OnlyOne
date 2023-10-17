@@ -14,6 +14,10 @@ public class FogMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.frozen){
+            return;
+        }
+        
         transform.position += Vector3.left*0.02f;
         if(transform.position.x < -45){
             transform.position = otherFog.transform.position + Vector3.right*86.4f;
