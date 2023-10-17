@@ -15,10 +15,14 @@ public class Player : MonoBehaviour
     const int stunAmt = 1000;
     int lastThrown = -1;
 
+    public SpriteRenderer currentSprite;
+    public Sprite upSprite,downSprite,leftSprite,rightSprite;
+
     public AudioClip walkingSound;
     public AudioSource walkingSource;
     void Start()
     {
+        currentSprite = GetComponent<SpriteRenderer>();
         walkingSource = GetComponent<AudioSource>();
         stun = false;
         stunClock = stunAmt;
@@ -38,15 +42,21 @@ public class Player : MonoBehaviour
         }
         else {
             if (Input.GetKey(upKey)){
+                currentSprite.sprite = upSprite;
                 positionMove+= Vector3.up*0.035f;
             }
             if (Input.GetKey(downKey)){
+                currentSprite.sprite = downSprite;
                 positionMove+= Vector3.down*0.035f;
             }
             if (Input.GetKey(leftKey)){
+                currentSprite.sprite = leftSprite;
                 positionMove+= Vector3.left*0.035f;
             }
             if (Input.GetKey(rightKey)){
+                if(currentSprite.sprite!=rightSprite){
+                    currentSprite.sprite = rightSprite;
+                }
                 positionMove+= Vector3.right*0.035f;
             }
             if (Input.GetKey(throwKey)){
@@ -71,6 +81,7 @@ public class Player : MonoBehaviour
             if(positionMove.magnitude > 0)
             {
                 positionMove = positionMove.normalized*0.035f;
+                
                 if(!walkingSource.isPlaying)
                 {
                     walkingSource.Play();
@@ -92,7 +103,7 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.name=="Monster"){
+        if(other.gameObject.tag=="Finish"){
             Debug.Log("You died");
             frozen = true;
         }
