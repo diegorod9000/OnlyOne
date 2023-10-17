@@ -28,6 +28,10 @@ public class ThrownDebris : MonoBehaviour
         for(int i = 0; i < numDebris; i++){
             if(debris[i]){
                 debris[i].transform.position += targets[i].normalized*0.05f;
+                Vector3 objPos = debris[i].transform.position;
+                if(objPos.x < -50.0f || objPos.x > 50.0f || objPos.y < -25.0f || objPos.y > 25.0f){
+                    destroyDebris(i);
+                }
             }
         }
     }
@@ -59,18 +63,17 @@ public class ThrownDebris : MonoBehaviour
         thrown[i] = false;
     }
 
-    public GameObject addDebris(Vector3 pos){
-        GameObject newDebris = null;
+    public bool addDebris(Vector3 pos){
         for(int i = 0; i < numDebris; i++){
             if(!debris[i]){
                 targets[i] = new Vector3(0f, 0f, 0f);
-                newDebris = Instantiate(log, pos, Quaternion.identity);
+                GameObject newDebris = Instantiate(log, pos, Quaternion.identity);
                 thrown[i] = false;
                 debris[i] = newDebris;
-                break;
+                return true;
             }
         }
-        return newDebris;
+        return false;
     }
 
 }
