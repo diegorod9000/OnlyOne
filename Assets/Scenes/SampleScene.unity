@@ -319,6 +319,7 @@ MonoBehaviour:
   downSprite: {fileID: 21300000, guid: a04022f24d74442848d2e5482577d7fc, type: 3}
   leftSprite: {fileID: 21300000, guid: f839fd9060b59493fb61dcaa76493320, type: 3}
   rightSprite: {fileID: 21300000, guid: 486f950e42e0645c58b89e0d23a68cc3, type: 3}
+  stunSprite: {fileID: 21300000, guid: 8daa557d302914bc498ed6ee01b4cacb, type: 3}
   walkingSound: {fileID: 8300000, guid: e2b90253f7c0f4b30813f0b72d88c071, type: 3}
   walkingSource: {fileID: 0}
 --- !u!50 &82646321
@@ -1253,6 +1254,7 @@ MonoBehaviour:
   downSprite: {fileID: 21300000, guid: 9d272fbe01fc746a896a157947c4cb9d, type: 3}
   leftSprite: {fileID: 21300000, guid: 64b8e05577a2044dda6d005e4bc33c3c, type: 3}
   rightSprite: {fileID: 21300000, guid: 27645b89e2c77487b90aaafcb49d5b1b, type: 3}
+  stunSprite: {fileID: 21300000, guid: 5a8e00a5871444e2281ddad1e1d45a08, type: 3}
   walkingSound: {fileID: 8300000, guid: e2b90253f7c0f4b30813f0b72d88c071, type: 3}
   walkingSource: {fileID: 0}
 --- !u!50 &1415706366

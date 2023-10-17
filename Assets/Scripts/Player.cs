@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private float adrenaline;
 
     public SpriteRenderer currentSprite;
-    public Sprite upSprite,downSprite,leftSprite,rightSprite;
+    public Sprite upSprite, downSprite, leftSprite, rightSprite, stunSprite;
 
     public AudioClip walkingSound;
     public AudioSource walkingSource;
@@ -39,10 +39,11 @@ public class Player : MonoBehaviour
         if(GameManager.frozen){
             return;
         }
-        
+
         Vector3 positionMove = Vector3.zero;
         transform.position+= Vector3.left*0.02f;
         if(stun){
+            currentSprite.sprite=stunSprite;
             stunClock--;
             if(stunClock == 0){
                 stun = false;
