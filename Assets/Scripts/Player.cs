@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag=="Finish"){
+        if(other.gameObject.name=="Monster"){
             Debug.Log("You died");
             frozen = true;
         }
