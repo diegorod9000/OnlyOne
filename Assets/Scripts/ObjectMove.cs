@@ -19,4 +19,10 @@ public class Map : MonoBehaviour
         transform.position+= Vector3.left*0.02f;
         
     }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.name=="Monster"){
+            Destroy(gameObject);
+        }
+    }
 }
