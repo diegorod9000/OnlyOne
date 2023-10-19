@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private float playerSpeed;
     private float adrenaline;
 
+    private int boostTime;
+
     public SpriteRenderer currentSprite;
     public Sprite upSprite, downSprite, leftSprite, rightSprite, stunSprite;
 
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour
     {
         adrenaline = 0.0f;
         playerSpeed = 0.03f;
+        boostTime = 0;
+
         currentSprite = GetComponent<SpriteRenderer>();
         walkingSource = GetComponent<AudioSource>();
         stun = false;
@@ -103,8 +107,27 @@ public class Player : MonoBehaviour
             }
             transform.position+=positionMove;
         }
-        if(transform.position.x<-10){
+
+        if(transform.position.x<-10)
+        {
             adrenaline+=0.1f;
+        }
+        else 
+        {
+            adrenaline -=0.05f;
+        }
+        if(adrenaline > 120)
+        {
+            boostTime = 1200;
+        }
+        if(boostTime>0)
+        {
+            playerSpeed = 0.04f;
+            boostTime--;
+        }
+        else
+        {
+            playerSpeed = 0.03f;
         }
     }
 
