@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         adrenaline = 0.0f;
-        playerSpeed = 0.03f;
+        playerSpeed = 0.05f;
         boostTime = 0;
 
         currentSprite = GetComponent<SpriteRenderer>();
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
 
         Vector3 positionMove = Vector3.zero;
-        transform.position+= Vector3.left*0.02f;
+        transform.position+= Vector3.left*0.04f;
         if(stun){
             currentSprite.sprite=stunSprite;
             stunClock--;
@@ -122,12 +122,12 @@ public class Player : MonoBehaviour
         }
         if(boostTime>0)
         {
-            playerSpeed = 0.04f;
+            playerSpeed = 0.06f;
             boostTime--;
         }
         else
         {
-            playerSpeed = 0.03f;
+            playerSpeed = 0.05f;
         }
     }
 

@@ -35,7 +35,7 @@ public class MapObjects : MonoBehaviour
             return;
         }
         
-        if(framePos == 300){
+        if(framePos == 150){
             framePos = 0;
             Destroy(borders[0]);
             Destroy(borders[1]);
@@ -58,24 +58,24 @@ public class MapObjects : MonoBehaviour
         }
         currentObstacle -= numDeleted;
 
-        float rand = Random.Range(0.0f, 10.0f);
+        float rand = Random.Range(0.0f, 4.0f);
         if(framePos % 100 == 0  && rand < 2.0f && currentObstacle != numObstacles){
-            if(rand < 0.25f){
-                obstacles[currentObstacle] = Instantiate(log, new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0), new Quaternion(Random.Range(0,180),Random.Range(0,180),0,0));
+            if(rand < 0.66f){
+                obstacles[currentObstacle] = Instantiate(log, new Vector3(50.0f, Random.Range(-19.0f, 19.0f), 0), new Quaternion(Random.Range(0,180.0f),Random.Range(0,180.0f),0,0));
                 currentObstacle++;
-            } else if(rand < 0.5f) {
+            } else if(rand < 1.33f) {
                 obstacles[currentObstacle] = Instantiate(tree, new Vector3(50.0f, Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
                 currentObstacle++;
-            } else if(rand < 0.75f) {
-                obstacles[currentObstacle] = Instantiate(logLine, new Vector3(50.0f, Random.Range(-12.0f, 12.0f), 0), new Quaternion(Random.Range(0,180),Random.Range(0,180),0,0));
+            } else if(rand < 0) {
+                obstacles[currentObstacle] = Instantiate(logLine, new Vector3(50.0f, Random.Range(-12.0f, 12.0f), 0), Quaternion.identity);
                 currentObstacle++;
-            } else if(rand < 1.0f) {
+            } else if(rand < 0f) {
                 obstacles[currentObstacle] = Instantiate(treeLine, new Vector3(50.0f, Random.Range(-10.0f, 10.0f), 0), Quaternion.identity);
                 currentObstacle++;
-            } else if(rand < 1.25f) {
-                obstacles[currentObstacle] = Instantiate(logMess, new Vector3(50.0f, Random.Range(-10.0f, 10.0f), 0), new Quaternion(Random.Range(0,180),Random.Range(0,180),0,0));
+            } else if(rand < 0f) {
+                obstacles[currentObstacle] = Instantiate(logMess, new Vector3(50.0f, Random.Range(-10.0f, 10.0f), 0), Quaternion.identity);
                 currentObstacle++;
-            } else if(rand < 1.5f) {
+            } else if(rand < 0f) {
                 obstacles[currentObstacle] = Instantiate(treeClump, new Vector3(50.0f, Random.Range(0.0f, 7.0f), 0), Quaternion.identity);
                 currentObstacle++;
             } else {
